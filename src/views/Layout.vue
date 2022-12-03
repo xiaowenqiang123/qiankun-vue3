@@ -1,7 +1,7 @@
 <template>
     <div class="w-screen h-screen flex">
         <div class="mr-5">
-            <Menu class="h-full" :nav="nav" />
+            <Menu class="h-full" :nav="nav" @menuClick="handleMenuClick" />
         </div>
         <div class="flex flex-1 overflow-hidden relative">
             <div id="Container"></div>
@@ -17,11 +17,21 @@ import { ElLoading } from "element-plus";
 const loading = ref(true);
 const nav = ref([
     {
-        name: "Navigator Two",
+        name: "Simpson",
         url: "vue", // 对应激活的路由
         index: "0",
     },
+    {
+        name: "tset",
+        url: "react", // 对应激活的路由
+        index: "1",
+    },
 ]);
-// setDefaultMountApp(nav.value[0].url);
+setDefaultMountApp(nav.value[0].url);
 start();
+
+const handleMenuClick = (index: string) => {
+    const res = nav.value.find((res) => res.index === index);
+    window.history.pushState(null, "", res?.url);
+};
 </script>
